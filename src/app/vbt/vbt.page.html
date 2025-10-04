@@ -1,0 +1,201 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Calculadora VBT</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/home"></ion-back-button>
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-button fill="clear" (click)="mostrarModalInfo()">
+        <ion-icon
+          style="font-size: 25px"
+          name="information-circle-outline"
+          color="primary"
+        ></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Calculadora VBT</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <div class="container">
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>Parámetros de Entrenamiento</ion-card-title>
+        <ion-card-subtitle
+          >Introduce los datos para el cálculo VBT</ion-card-subtitle
+        >
+      </ion-card-header>
+
+      <ion-card-content>
+        <form>
+          <!-- Input Carga -->
+          <ion-item>
+            <ion-input
+              label="Ultima Aproximación (kg)"
+              name="carga"
+              type="number"
+              placeholder="Introduce la carga"
+              [(ngModel)]="carga"
+              min="0"
+              step="0.1"
+              required
+            >
+            </ion-input>
+          </ion-item>
+
+          <!-- Input Velocidad -->
+          <ion-item>
+            <ion-input
+              label="Velocidad Promedio (m/s)"
+              name="velocidad"
+              type="number"
+              placeholder="Introduce la velocidad"
+              [(ngModel)]="velocidad"
+              min="0"
+              step="0.01"
+              required
+            >
+            </ion-input>
+            @if (velocidad > 0) {
+              <ion-note slot="end" [color]="obtenerClasificacionVelocidad().color">
+                <ion-icon [name]="obtenerClasificacionVelocidad().icono"></ion-icon>
+                {{obtenerClasificacionVelocidad().texto}}
+              </ion-note>
+            }
+          </ion-item>
+
+          <!-- Select Ejercicio -->
+          <ion-item>
+            <ion-select
+              label="Ejercicio"
+              name="ejercicio"
+              [(ngModel)]="ejercicio"
+              placeholder="Selecciona un ejercicio"
+            >
+              <ion-select-option
+                *ngFor="let ejercicio of ejercicios"
+                [value]="ejercicio.valor"
+              >
+                {{ejercicio.nombre}}
+              </ion-select-option>
+            </ion-select>
+          </ion-item>
+
+          <!-- Input Porcentaje -->
+          <ion-item>
+            <ion-input
+              label="Porcentaje (%)"
+              name="porcentaje"
+              type="number"
+              placeholder="Porcentaje (100 por defecto)"
+              [(ngModel)]="porcentaje"
+              min="1"
+              max="200"
+              step="1"
+              required
+            >
+            </ion-input>
+          </ion-item>
+
+          <!-- Botones de acción -->
+          <div class="button-container">
+            <ion-button
+              expand="block"
+              (click)="vbtCalcular()"
+              [disabled]="!esFormularioValido() || calculando"
+              class="calculate-button"
+            >
+              @if (calculando) {
+                <ion-icon name="refresh" class="spinning" slot="start"></ion-icon>
+                Calculando...
+              } @else {
+                <ion-icon name="calculator" slot="start"></ion-icon>
+                Calcular VBT
+              }
+            </ion-button>
+
+            @if (mostrarResultados) {
+              <ion-button
+                expand="block"
+                fill="outline"
+                (click)="limpiarFormulario()"
+                class="clear-button"
+              >
+                <ion-icon name="refresh" slot="start"></ion-icon>
+                Nuevo Cálculo
+              </ion-button>
+            }
+          </div>
+        </form>
+      </ion-card-content>
+    </ion-card>
+
+    <!-- Resultados VBT -->
+    @if (mostrarResultados) {
+      <ion-card>
+        <ion-card-header>
+          <ion-card-title>📊 Resultados VBT</ion-card-title>
+          <ion-card-subtitle
+            >Ejercicio: {{obtenerNombreEjercicio()}}</ion-card-subtitle
+          >
+        </ion-card-header>
+
+      <ion-card-content [class.animate-in]="animarResultados">
+        <!-- Resultado Principal -->
+        @if (porcentaje !== 100) {
+          <div class="resultado-item destacado resultado-principal">
+            <ion-icon name="star" color="success"></ion-icon>
+            <div class="resultado-texto">
+              <p class="resultado-label">🎯 Carga Objetivo al {{porcentaje}}%</p>
+              <p class="resultado-valor-principal">
+                {{cargaEstimada | number:'1.1-1'}} kg
+              </p>
+            </div>
+          </div>
+        } @else {
+          <div class="resultado-item destacado resultado-principal">
+            <ion-icon name="trophy" color="warning"></ion-icon>
+            <div class="resultado-texto">
+              <p class="resultado-label">Tu 1RM Estimado</p>
+              <p class="resultado-valor-principal">
+                {{resultado1RM | number:'1.1-1'}} kg
+              </p>
+            </div>
+          </div>
+        }
+
+        <!-- Información Detallada -->
+        <div class="info-grid">
+          <div class="info-card">
+            <ion-icon name="barbell" color="primary"></ion-icon>
+            <div class="info-content">
+              <p class="info-label">1RM Estimado</p>
+              <p class="info-valor">{{resultado1RM | number:'1.1-1'}} kg</p>
+            </div>
+          </div>
+
+          <div class="info-card">
+            <ion-icon name="speedometer" color="secondary"></ion-icon>
+            <div class="info-content">
+              <p class="info-label">% de la carga ingresada respecto al 1RM Actual</p>
+              <p class="info-valor">{{percent1Rm | number:'1.1-1'}}%</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Clasificación de Intensidad -->
+        <div class="intensidad-banner">
+          <ion-icon name="informationCircle" color="tertiary"></ion-icon>
+          <span>{{obtenerNivelIntensidad()}}</span>
+        </div>
+      </ion-card-content>
+      </ion-card>
+    }
+  </div>
+</ion-content>

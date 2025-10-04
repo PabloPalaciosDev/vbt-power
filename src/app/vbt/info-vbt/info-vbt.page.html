@@ -1,0 +1,274 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>📚 Guía VBT - Velocity Based Training</ion-title>
+    <ion-buttons slot="end">
+      <ion-button fill="clear" (click)="cerrar()">
+        <ion-icon name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="info-modal" [scrollY]="true" [scrollX]="false" [forceOverscroll]="false">
+  <!-- Introducción -->
+  <ion-card class="intro-card">
+    <ion-card-header>
+      <ion-card-title>
+        <ion-icon
+          style="font-size: 25px"
+          name="information-circle-outline"
+          color="primary"
+        ></ion-icon>
+        ¿Qué es VBT?
+      </ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <p>
+        <strong>Velocity Based Training (VBT)</strong> es un método de
+        entrenamiento que utiliza la velocidad de ejecución para determinar la
+        intensidad del ejercicio y optimizar las cargas de trabajo.
+      </p>
+      <p><strong>Instrucciones</strong></p>
+      <ol>
+        <li>
+          Primero introducimos la carga utilizada en la última aproximación o
+          serie.
+        </li>
+        <li>
+          Luego, registramos la velocidad promedio alcanzada durante esa serie.
+        </li>
+        <li>
+          <strong
+            >Como resultado obtendras la carga estimada de tu 1RM y el
+            porcentaje</strong
+          >
+        </li>
+
+        <li>
+          Finalmente,
+          <strong>puedes seleccionar un porcentaje objetivo</strong> para
+          recibir una recomendación de carga basada en la velocidad.
+        </li>
+      </ol>
+    </ion-card-content>
+  </ion-card>
+
+  <!-- Clasificaciones de Velocidad -->
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>
+        <ion-icon name="speedometer" color="primary"></ion-icon>
+        Clasificaciones de Velocidad
+      </ion-card-title>
+      <ion-card-subtitle
+        >Específicas por ejercicio según investigación
+        científica</ion-card-subtitle
+      >
+    </ion-card-header>
+
+    <ion-card-content>
+      <!-- Squat -->
+      <div class="ejercicio-section">
+        <h3>🏋️ Squat</h3>
+        <ion-list>
+          @for (item of getClasificacionesSquat(); track item.categoria) {
+          <ion-item>
+            <ion-icon
+              [name]="item.icono"
+              [color]="item.color"
+              slot="start"
+            ></ion-icon>
+            <ion-label>
+              <h4>{{item.velocidad}}</h4>
+              <p>{{item.categoria}} - {{item.porcentaje}}</p>
+            </ion-label>
+            <ion-note slot="end" [color]="item.color"
+              >{{item.categoria}}</ion-note
+            >
+          </ion-item>
+          }
+        </ion-list>
+      </div>
+
+      <!-- Bench Press -->
+      <div class="ejercicio-section">
+        <h3>💪 Bench Press</h3>
+        <ion-list>
+          @for (item of getClasificacionesBench(); track item.categoria) {
+          <ion-item>
+            <ion-icon
+              [name]="item.icono"
+              [color]="item.color"
+              slot="start"
+            ></ion-icon>
+            <ion-label>
+              <h4>{{item.velocidad}}</h4>
+              <p>{{item.categoria}} - {{item.porcentaje}}</p>
+            </ion-label>
+            <ion-note slot="end" [color]="item.color"
+              >{{item.categoria}}</ion-note
+            >
+          </ion-item>
+          }
+        </ion-list>
+      </div>
+
+      <!-- Deadlift -->
+      <div class="ejercicio-section">
+        <h3>🚀 Deadlift</h3>
+        <ion-list>
+          @for (item of getClasificacionesDeadlift(); track item.categoria) {
+          <ion-item>
+            <ion-icon
+              [name]="item.icono"
+              [color]="item.color"
+              slot="start"
+            ></ion-icon>
+            <ion-label>
+              <h4>{{item.velocidad}}</h4>
+              <p>{{item.categoria}} - {{item.porcentaje}}</p>
+            </ion-label>
+            <ion-note slot="end" [color]="item.color"
+              >{{item.categoria}}</ion-note
+            >
+          </ion-item>
+          }
+        </ion-list>
+      </div>
+    </ion-card-content>
+  </ion-card>
+
+  <!-- Niveles de Intensidad -->
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>
+        <ion-icon name="fitness" color="primary"></ion-icon>
+        Niveles de Intensidad
+      </ion-card-title>
+      <ion-card-subtitle
+        >Qué significa cada zona de entrenamiento</ion-card-subtitle
+      >
+    </ion-card-header>
+
+    <ion-card-content>
+      <ion-list>
+        @for (nivel of getNivelesIntensidad(); track nivel.nivel) {
+        <ion-item>
+          <ion-label>
+            <h3>{{nivel.nivel}}</h3>
+            <h4>{{nivel.porcentaje}} del 1RM</h4>
+            <p>{{nivel.descripcion}}</p>
+          </ion-label>
+        </ion-item>
+        }
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
+
+  <!-- Cómo Interpretar -->
+  <ion-card class="interpretation-card">
+    <ion-card-header>
+      <ion-card-title>
+        <ion-icon name="checkmarkCircle" color="success"></ion-icon>
+        Cómo Interpretar los Resultados
+      </ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content>
+      <ion-list>
+        <ion-item>
+          <ion-icon name="trophy" color="warning" slot="start"></ion-icon>
+          <ion-label>
+            <h4>1RM Estimado</h4>
+            <p>Tu fuerza máxima calculada basada en la velocidad actual</p>
+          </ion-label>
+        </ion-item>
+
+        <ion-item>
+          <ion-icon name="analytics" color="secondary" slot="start"></ion-icon>
+          <ion-label>
+            <h4>% del 1RM Actual</h4>
+            <p>Qué intensidad representa tu carga actual</p>
+          </ion-label>
+        </ion-item>
+
+        <ion-item>
+          <ion-icon name="barbell" color="primary" slot="start"></ion-icon>
+          <ion-label>
+            <h4>Carga Objetivo</h4>
+            <p>Peso recomendado para el porcentaje que deseas entrenar</p>
+          </ion-label>
+        </ion-item>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
+
+  <!-- Advertencia Científica -->
+  <ion-card class="warning-card">
+    <ion-card-header>
+      <ion-card-title style="color: var(--ion-color-dark)">
+        <ion-icon name="warning" class="warning-icon"></ion-icon>
+        Nota Científica
+      </ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content>
+      <p>
+        <strong
+          >Estas clasificaciones están basadas en estudios científicos:</strong
+        >
+      </p>
+      <ul>
+        <li>
+          González-Badillo, J. J., & Sánchez-Medina, A. (2010). Movement
+          velocity as a measure of loading intensity in resistance training.
+        </li>
+        <li>
+          Sánchez-Medina, A., & González-Badillo, J. J. (2011). Velocity loss as
+          an indicator of neuromuscular fatigue during resistance training.
+        </li>
+        <li>
+          Sánchez-Medina L, González-Badillo JJ, Pérez CE, Pallarés JG.
+          Velocity- and power-load relationships of the bench pull vs. bench
+          press exercises.
+        </li>
+        <li>
+          Pérez-Castilla A, Piepoli A, Delgado-García G, Garrido-Blanca G,
+          García-Ramos A. Reliability and Concurrent Validity of Seven
+          Commercially Available Devices for the Assessment of Movement Velocity
+          at Different Intensities During the Bench Press.
+        </li>
+        <li>
+          Pérez-Castilla, A., García-Ramos, A., Sánchez-Medina, A., Padial, P.,
+          & Morales-Artacho, A. J. (2020). Load–velocity relationship in the
+          free-weight bench press exercise: Influence of gender and training
+          level.
+        </li>
+      </ul>
+      <p>
+        Los valores pueden variar ligeramente entre individuos. Usa esta
+        herramienta como guía y ajusta según tu experiencia.
+      </p>
+    </ion-card-content>
+  </ion-card>
+
+  <!-- Checkbox para no mostrar de nuevo -->
+  <ion-card class="checkbox-card">
+    <ion-card-content>
+      <ion-item>
+        <ion-checkbox [(ngModel)]="noMostrarDeNuevo"></ion-checkbox>
+        <ion-label class="ion-margin-start">
+          No mostrar esta información de nuevo
+        </ion-label>
+      </ion-item>
+    </ion-card-content>
+  </ion-card>
+
+  <!-- Botón de cierre -->
+  <div class="close-section">
+    <ion-button (click)="cerrar()" class="close-button">
+      <ion-icon name="checkmarkCircle" slot="start"></ion-icon>
+      Entendido, Comenzar a Usar VBT
+    </ion-button>
+  </div>
+</ion-content>

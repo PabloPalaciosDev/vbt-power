@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">VBT Power</string>
+    <string name="title_activity_main">VBT Power</string>
+    <string name="package_name">com.vbtpower.app</string>
+    <string name="custom_url_scheme">com.vbtpower.app</string>
+</resources>

@@ -1,0 +1,313 @@
+.info-modal {
+  --background: var(--ion-color-light-tint);
+  --overflow: auto;
+  --scroll-y: true;
+  --scroll-x: false;
+  height: 100%;
+  overflow-y: auto;
+}
+
+/* Asegurar que el contenido sea scrollable */
+ion-content.info-modal {
+  --overflow: auto !important;
+  height: 100%;
+
+  .scroll-content {
+    overflow-y: auto !important;
+    overscroll-behavior: contain;
+  }
+}
+
+/* Tarjeta de introducción */
+.intro-card {
+  margin: 16px;
+  border-radius: 16px;
+  border: 3px solid var(--ion-color-primary);
+
+  ion-card-title {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: var(--ion-color-dark);
+    font-size: 1.5rem;
+    font-weight: bold;
+  }
+
+  ion-card-content {
+    color: var(--ion-color-dark);
+
+    p {
+      margin-bottom: 12px;
+      line-height: 1.6;
+    }
+
+    strong {
+      font-weight: bold;
+    }
+  }
+}
+
+/* Secciones de ejercicios */
+.ejercicio-section {
+  margin-bottom: 24px;
+
+  h3 {
+    color: var(--ion-color-primary);
+    font-size: 1.3rem;
+    font-weight: bold;
+    margin-bottom: 12px;
+    padding: 0 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  ion-list {
+    margin: 0;
+
+    ion-item {
+      --border-radius: 8px;
+      --background: var(--ion-color-light);
+      margin-bottom: 8px;
+      margin-left: 16px;
+      margin-right: 16px;
+      border: 1px solid var(--ion-color-light-shade);
+
+      ion-label {
+        h4 {
+          font-weight: bold;
+          color: var(--ion-color-dark);
+          margin: 4px 0;
+        }
+
+        p {
+          color: var(--ion-color-medium);
+          margin: 2px 0;
+          font-size: 0.9rem;
+        }
+      }
+
+      ion-note {
+        font-weight: bold;
+        font-size: 0.8rem;
+      }
+    }
+  }
+}
+
+/* Tarjeta de interpretación */
+.interpretation-card {
+  border: 3px solid var(--ion-color-success);
+  border-radius: 16px;
+  margin: 16px;
+
+  ion-card-title {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: var(--ion-color-success-contrast);
+    font-weight: bold;
+  }
+
+  ion-item {
+    --background: rgba(255, 255, 255, 0.9);
+    --border-radius: 12px;
+    margin-bottom: 8px;
+
+    ion-label {
+      h4 {
+        font-weight: bold;
+        color: var(--ion-color-dark);
+        margin: 4px 0;
+      }
+
+      p {
+        color: var(--ion-color-medium);
+        margin: 2px 0;
+        font-size: 0.9rem;
+      }
+    }
+  }
+}
+
+/* Tarjeta de advertencia */
+.warning-card {
+  border: 3px solid var(--ion-color-warning);
+  border-radius: 16px;
+  margin: 16px;
+  color: var(--ion-color-dark);
+
+  ion-card-title {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-weight: bold;
+  }
+
+  .warning-icon {
+    color: var(--ion-color-warning);
+  }
+
+  ion-card-content {
+    color: var(--ion-color-dark);
+
+    p {
+      margin-bottom: 12px;
+      line-height: 1.6;
+    }
+
+    ul {
+      margin: 12px 0;
+      padding-left: 20px;
+
+      li {
+        margin-bottom: 4px;
+        font-style: italic;
+        color: var(--ion-color-dark);
+      }
+    }
+
+    strong {
+      color: var(--ion-color-dark);
+    }
+  }
+}
+
+/* Tarjeta del checkbox */
+.checkbox-card {
+  margin: 16px;
+  border: 2px solid var(--ion-color-medium);
+  border-radius: 12px;
+
+  ion-item {
+    --background: transparent;
+
+    ion-label {
+      font-weight: 500;
+      color: var(--ion-color-dark);
+    }
+  }
+}
+
+/* Sección de cierre */
+.close-section {
+  margin-bottom: 60px;
+  margin-top: 20px;
+  padding: 16px;
+  text-align: center;
+
+  .close-button {
+    --border-radius: 16px;
+
+    font-weight: bold;
+    --background: linear-gradient(45deg, var(--ion-color-success), var(--ion-color-primary));
+    --box-shadow: 0 6px 20px rgba(var(--ion-color-success-rgb), 0.4);
+
+  }
+}
+
+/* Tarjetas generales */
+ion-card {
+  margin: 16px;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+
+  ion-card-header {
+    padding-bottom: 8px;
+
+    ion-card-title {
+      font-size: 1.3rem;
+      font-weight: bold;
+      color: var(--ion-color-primary);
+    }
+
+    ion-card-subtitle {
+      color: var(--ion-color-medium);
+      font-style: italic;
+      margin-top: 4px;
+    }
+  }
+
+  ion-card-content {
+    padding-top: 8px;
+  }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  ion-card {
+    margin: 8px;
+  }
+
+  .ejercicio-section {
+    h3 {
+      font-size: 1.2rem;
+      padding: 0 8px;
+    }
+
+    ion-list ion-item {
+      margin-left: 8px;
+      margin-right: 8px;
+    }
+  }
+
+  .close-section {
+    margin-bottom: 80px;
+    padding: 16px 12px 20px 12px;
+
+    .close-button {
+      height: 52px;
+      width: 100%;
+      margin-top: 8px;
+    }
+  }
+}
+
+/* Animaciones */
+ion-card {
+  animation: fadeInUp 0.3s ease-out;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Estilos adicionales para el modal */
+:host {
+  display: block;
+  height: 100%;
+
+  ion-header {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+  }
+
+  ion-content {
+    --padding-bottom: 80px;
+  }
+}
+
+/* Headers específicos */
+ion-header {
+  ion-toolbar {
+    --background: linear-gradient(45deg, var(--ion-color-primary), var(--ion-color-secondary));
+
+    ion-title {
+      color: white;
+      font-weight: bold;
+      font-size: 1.2rem;
+    }
+
+    ion-button {
+      --color: white;
+    }
+  }
+}
