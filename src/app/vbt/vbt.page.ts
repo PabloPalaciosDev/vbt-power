@@ -16,7 +16,9 @@ import {
   flashlight,
   star,
   book,
-  informationCircleOutline
+  informationCircleOutline,
+  settings,
+  alertCircle
 } from 'ionicons/icons';
 import { IonTitle } from '@ionic/angular/standalone';
 import {
@@ -37,10 +39,13 @@ import {
   IonButtons,
   IonCardHeader,
   IonNote,
+  IonToast,
+  ToastController
 } from '@ionic/angular/standalone';
-import { environment } from 'src/environments/environment';
 import { ModalController } from '@ionic/angular';
 import { InfoVbtPage } from './info-vbt/info-vbt.page';
+import { VbtConfigService, VbtCalculationInput, VbtCalculationResult } from '../services/vbt-config.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-vbt',
@@ -91,6 +96,10 @@ export class VbtPage implements OnInit {
   // Variables para el modal informativo
   private readonly STORAGE_KEY = 'vbt_no_mostrar_info';
 
+  // Variables para configuración personalizada
+  configurationStatus: { isPersonalized: boolean, message: string } =
+    { isPersonalized: false, message: '' };
+
   // Opciones para el select de ejercicios
   ejercicios = [
     { valor: 1, nombre: 'Squat' },
@@ -98,7 +107,12 @@ export class VbtPage implements OnInit {
     { valor: 3, nombre: 'Deadlift' },
   ];
 
-  constructor(private modalCtrl: ModalController) {
+  constructor(
+    private modalCtrl: ModalController,
+    private vbtConfigService: VbtConfigService,
+    private toastController: ToastController,
+    private router: Router
+  ) {
     addIcons({
       calculator,
       arrowBack,
@@ -112,6 +126,8 @@ export class VbtPage implements OnInit {
       informationCircle,
       flashlight,
       star,
+      settings,
+      alertCircle,
       informationCircleOutline,
       book,
     });
@@ -119,6 +135,51 @@ export class VbtPage implements OnInit {
 
   ngOnInit() {
     this.verificarMostrarModal();
+    this.loadConfigurationStatus();
+  }
+
+  /**
+   * Carga el estado de configuración actual
+   */
+  private loadConfigurationStatus(): void {
+    this.configurationStatus = this.vbtConfigService.getConfigurationStatus();
+
+    // Mostrar mensaje informativo si no hay configuración personalizada
+    if (!this.configurationStatus.isPersonalized) {
+      this.showConfigurationToast();
+    }
+  }
+
+  /**
+   * Muestra toast informativo sobre configuración
+   */
+  private async showConfigurationToast(): Promise<void> {
+    const toast = await this.toastController.create({
+      message: this.configurationStatus.message,
+      duration: 4000,
+      position: 'top',
+      icon: 'alert-circle',
+      buttons: [
+        {
+          text: 'Configurar',
+          handler: () => {
+            this.navigateToConfig();
+          }
+        },
+        {
+          text: 'Cerrar',
+          role: 'cancel'
+        }
+      ]
+    });
+    await toast.present();
+  }
+
+  /**
+   * Navega a la página de configuración
+   */
+  navigateToConfig(): void {
+    this.router.navigate(['/vbt-config']);
   }
 
   /**
@@ -170,46 +231,29 @@ export class VbtPage implements OnInit {
     // Simular un pequeño delay para mejor UX
     await new Promise((resolve) => setTimeout(resolve, 800));
 
-    // 1️⃣ Calcular % del 1RM estimado según la velocidad
-    this.percent1Rm = this.oneRmPercentage(this.ejercicio, this.velocidad);
+    // Preparar datos de entrada
+    const input: VbtCalculationInput = {
+      carga: this.carga,
+      velocidad: this.velocidad,
+      ejercicio: this.ejercicio,
+      porcentaje: this.porcentaje
+    };
 
-    // 2️⃣ Calcular 1RM estimado
-    this.resultado1RM = this.carga / (this.percent1Rm / 100);
+    // Realizar cálculos usando el servicio
+    const resultado: VbtCalculationResult = this.vbtConfigService.calculateVbt(input);
 
-    // 3️⃣ Calcular carga estimada para el porcentaje solicitado
-    if (this.porcentaje === 100) {
-      this.cargaEstimada = this.resultado1RM;
-    } else {
-      this.cargaEstimada = this.resultado1RM * (this.porcentaje / 100);
-    }
+    // Asignar resultados a las variables del componente
+    this.percent1Rm = resultado.percent1Rm;
+    this.resultado1RM = resultado.resultado1RM;
+    this.cargaEstimada = resultado.cargaEstimada;
 
     this.calculando = false;
 
-    // 4️⃣ Mostrar resultados con animación
+    // Mostrar resultados con animación
     setTimeout(() => {
       this.mostrarResultados = true;
       this.animarResultados = true;
     }, 100);
-  }
-
-  oneRmPercentage(movimiento: number, velocidad: number): number {
-    switch (movimiento) {
-      case 1: // Squat
-        return (
-          environment.regresionASquat * velocidad + environment.regresionBSquat
-        );
-      case 2: // Bench Press
-        return (
-          environment.regresionABench * velocidad + environment.regresionBBench
-        );
-      case 3: // Deadlift
-        return (
-          environment.regresionADeadlift * velocidad +
-          environment.regresionBDeadlift
-        );
-      default:
-        return 0;
-    }
   }
 
   /**

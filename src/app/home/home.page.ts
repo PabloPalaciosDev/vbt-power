@@ -2,8 +2,7 @@ import { Component } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { IonHeader, IonToolbar, IonTitle, IonContent, IonButton, IonIcon } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
-import { calculator } from 'ionicons/icons';
-import { IonicModule } from "@ionic/angular";
+import { calculator, settings, informationCircleOutline } from 'ionicons/icons';
 
 @Component({
   selector: 'app-home',
@@ -13,7 +12,7 @@ import { IonicModule } from "@ionic/angular";
 })
 export class HomePage {
   constructor(private router: Router) {
-    addIcons({ calculator });
+    addIcons({ calculator, settings, informationCircleOutline });
   }
 
 }

@@ -25,12 +25,19 @@
 
 .button-container {
   margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
 
   ion-button {
     --border-radius: 12px;
     font-weight: bold;
     height: 60px;
     margin: 0;
+  }
+
+  ion-button[fill="outline"] {
+    --border-width: 2px;
   }
 }
 

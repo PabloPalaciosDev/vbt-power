@@ -16,9 +16,14 @@
     <p>Calculadora de 1RM y Cargas segun porcentaje basado en la velocidad del set o tus aproximaciones</p>
 
     <div class="button-container">
-      <ion-button routerLink="/vbt" >
-        <ion-icon name="calculator"></ion-icon>
+      <ion-button routerLink="/vbt" expand="block">
+        <ion-icon name="calculator" slot="start"></ion-icon>
         Iniciar VBT Calculator
+      </ion-button>
+
+      <ion-button routerLink="/vbt-config" fill="outline" expand="block">
+        <ion-icon name="settings" slot="start"></ion-icon>
+        Configuración Personalizada
       </ion-button>
     </div>
   </div>

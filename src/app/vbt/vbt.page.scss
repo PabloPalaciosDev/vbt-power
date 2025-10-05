@@ -4,6 +4,51 @@
   margin: 0 auto;
 }
 
+// Estado de configuración
+.config-status-card {
+  --background: rgba(var(--ion-color-light-rgb), 0.3);
+  margin-bottom: 20px;
+  border: 1px solid var(--ion-color-light-shade);
+
+  &[color="success"] {
+    --background: rgba(var(--ion-color-success-rgb), 0.1);
+    border-color: var(--ion-color-success-shade);
+  }
+
+  &[color="warning"] {
+    --background: rgba(var(--ion-color-warning-rgb), 0.1);
+    border-color: var(--ion-color-warning-shade);
+  }
+}
+
+.config-status {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  ion-icon {
+    font-size: 24px;
+    flex-shrink: 0;
+  }
+
+  .status-text {
+    flex: 1;
+
+    p {
+      margin: 0 0 8px 0;
+      font-weight: 500;
+      line-height: 1.4;
+    }
+
+    ion-button {
+      height: 32px;
+      --padding-start: 8px;
+      --padding-end: 8px;
+      margin: 0;
+    }
+  }
+}
+
 ion-card {
   margin: 16px 0;
   border-radius: 12px;

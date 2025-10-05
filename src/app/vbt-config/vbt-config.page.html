@@ -1,0 +1,610 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Configuración VBT</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/vbt"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Configuración VBT</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <div class="container">
+    <!-- Estado actual -->
+    <ion-card class="status-card">
+      <ion-card-content>
+        <div class="status-content">
+          <p>{{ getConfigStatus().message }}</p>
+        </div>
+      </ion-card-content>
+    </ion-card>
+
+    <!-- Información -->
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>
+          <ion-icon
+            name="information-circle-outline"
+            color="primary"
+          ></ion-icon>
+          Instrucciones
+        </ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <p><strong>Personaliza tu perfil VBT</strong></p>
+        <p>
+          Ingresa las velocidades y cargas que alcanzaste en series de 1
+          repetición al:
+        </p>
+        <ul>
+          <li>
+            <strong>90% 1RM:</strong> Velocidad y carga en tu serie más pesada
+          </li>
+          <li>
+            <strong>85% 1RM:</strong> Velocidad y carga en intensidad alta
+          </li>
+          <li>
+            <strong>75% 1RM:</strong> Velocidad y carga en intensidad
+            moderada-alta
+          </li>
+        </ul>
+        <p>
+          <ion-note
+            >Estos datos se usarán para crear coeficientes de regresión
+            personalizados y mejorar la precisión de tus cálculos VBT.</ion-note
+          >
+        </p>
+        <p>
+          <ion-note
+            >Puedes usar cargas que ronden los porcentajes indicados.</ion-note
+          >
+        </p>
+      </ion-card-content>
+    </ion-card>
+
+    <form [formGroup]="configForm">
+      <!-- SQUAT -->
+      <ion-card>
+        <ion-card-header>
+          <ion-card-title class="exercise-title">
+            <ion-icon name="barbell" color="primary"></ion-icon>
+            Squat
+          </ion-card-title>
+          <ion-card-subtitle
+            >Velocidades y cargas en series de 1 repetición</ion-card-subtitle
+          >
+        </ion-card-header>
+        <ion-card-content>
+          <ion-grid>
+            <!-- 90% 1RM -->
+            <ion-row class="percentage-row">
+              <ion-col size="12">
+                <h4>90% 1RM (Fuerza Máxima)</h4>
+              </ion-col>
+              <ion-col size="6">
+                <ion-item>
+                  <ion-input
+                    label="Velocidad (m/s)"
+                    type="number"
+                    step="0.01"
+                    placeholder="0.45"
+                    formControlName="squatVelocity90"
+                  >
+                    <ion-icon
+                      name="speedometer"
+                      slot="start"
+                      color="medium"
+                    ></ion-icon>
+                  </ion-input>
+                </ion-item>
+                @if (getFieldError('squatVelocity90')) {
+                <ion-note color="danger"
+                  >{{ getFieldError('squatVelocity90') }}</ion-note
+                >
+                }
+              </ion-col>
+              <ion-col size="6">
+                <ion-item>
+                  <ion-input
+                    label="Carga (kg)"
+                    type="number"
+                    step="0.5"
+                    placeholder="180"
+                    formControlName="squatLoad90"
+                  >
+                    <ion-icon
+                      name="barbell"
+                      slot="start"
+                      color="medium"
+                    ></ion-icon>
+                  </ion-input>
+                </ion-item>
+                @if (getFieldError('squatLoad90')) {
+                <ion-note color="danger"
+                  >{{ getFieldError('squatLoad90') }}</ion-note
+                >
+                }
+              </ion-col>
+            </ion-row>
+
+            <!-- 85% 1RM -->
+            <ion-row class="percentage-row">
+              <ion-col size="12">
+                <h4>85% 1RM (Alta Intensidad)</h4>
+              </ion-col>
+              <ion-col size="6">
+                <ion-item>
+                  <ion-input
+                    label="Velocidad (m/s)"
+                    type="number"
+                    step="0.01"
+                    placeholder="0.55"
+                    formControlName="squatVelocity85"
+                  >
+                    <ion-icon
+                      name="speedometer"
+                      slot="start"
+                      color="medium"
+                    ></ion-icon>
+                  </ion-input>
+                </ion-item>
+                @if (getFieldError('squatVelocity85')) {
+                <ion-note color="danger"
+                  >{{ getFieldError('squatVelocity85') }}</ion-note
+                >
+                }
+              </ion-col>
+              <ion-col size="6">
+                <ion-item>
+                  <ion-input
+                    label="Carga (kg)"
+                    type="number"
+                    step="0.5"
+                    placeholder="170"
+                    formControlName="squatLoad85"
+                  >
+                    <ion-icon
+                      name="barbell"
+                      slot="start"
+                      color="medium"
+                    ></ion-icon>
+                  </ion-input>
+                </ion-item>
+                @if (getFieldError('squatLoad85')) {
+                <ion-note color="danger"
+                  >{{ getFieldError('squatLoad85') }}</ion-note
+                >
+                }
+              </ion-col>
+            </ion-row>
+
+            <!-- 75% 1RM -->
+            <ion-row class="percentage-row">
+              <ion-col size="12">
+                <h4>75% 1RM (Moderada-Alta)</h4>
+              </ion-col>
+              <ion-col size="6">
+                <ion-item>
+                  <ion-input
+                    label="Velocidad (m/s)"
+                    type="number"
+                    step="0.01"
+                    placeholder="0.65"
+                    formControlName="squatVelocity75"
+                  >
+                    <ion-icon
+                      name="speedometer"
+                      slot="start"
+                      color="medium"
+                    ></ion-icon>
+                  </ion-input>
+                </ion-item>
+                @if (getFieldError('squatVelocity75')) {
+                <ion-note color="danger"
+                  >{{ getFieldError('squatVelocity75') }}</ion-note
+                >
+                }
+              </ion-col>
+              <ion-col size="6">
+                <ion-item>
+                  <ion-input
+                    label="Carga (kg)"
+                    type="number"
+                    step="0.5"
+                    placeholder="150"
+                    formControlName="squatLoad75"
+                  >
+                    <ion-icon
+                      name="barbell"
+                      slot="start"
+                      color="medium"
+                    ></ion-icon>
+                  </ion-input>
+                </ion-item>
+                @if (getFieldError('squatLoad75')) {
+                <ion-note color="danger"
+                  >{{ getFieldError('squatLoad75') }}</ion-note
+                >
+                }
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </ion-card-content>
+      </ion-card>
+
+      <!-- BENCH PRESS -->
+      <ion-card>
+        <ion-card-header>
+          <ion-card-title class="exercise-title">
+            <ion-icon name="barbell" color="secondary"></ion-icon>
+            Bench Press
+          </ion-card-title>
+          <ion-card-subtitle
+            >Velocidades y cargas en series de 1 repetición</ion-card-subtitle
+          >
+        </ion-card-header>
+        <ion-card-content>
+          <ion-grid>
+            <!-- 90% 1RM -->
+            <ion-row class="percentage-row">
+              <ion-col size="12">
+                <h4>90% 1RM (Fuerza Máxima)</h4>
+              </ion-col>
+              <ion-col size="6">
+                <ion-item>
+                  <ion-input
+                    label="Velocidad (m/s)"
+                    type="number"
+                    step="0.01"
+                    placeholder="0.25"
+                    formControlName="benchVelocity90"
+                  >
+                    <ion-icon
+                      name="speedometer"
+                      slot="start"
+                      color="medium"
+                    ></ion-icon>
+                  </ion-input>
+                </ion-item>
+                @if (getFieldError('benchVelocity90')) {
+                <ion-note color="danger"
+                  >{{ getFieldError('benchVelocity90') }}</ion-note
+                >
+                }
+              </ion-col>
+              <ion-col size="6">
+                <ion-item>
+                  <ion-input
+                    label="Carga (kg)"
+                    type="number"
+                    step="0.5"
+                    placeholder="135"
+                    formControlName="benchLoad90"
+                  >
+                    <ion-icon
+                      name="barbell"
+                      slot="start"
+                      color="medium"
+                    ></ion-icon>
+                  </ion-input>
+                </ion-item>
+                @if (getFieldError('benchLoad90')) {
+                <ion-note color="danger"
+                  >{{ getFieldError('benchLoad90') }}</ion-note
+                >
+                }
+              </ion-col>
+            </ion-row>
+
+            <!-- 85% 1RM -->
+            <ion-row class="percentage-row">
+              <ion-col size="12">
+                <h4>85% 1RM (Alta Intensidad)</h4>
+              </ion-col>
+              <ion-col size="6">
+                <ion-item>
+                  <ion-input
+                    label="Velocidad (m/s)"
+                    type="number"
+                    step="0.01"
+                    placeholder="0.35"
+                    formControlName="benchVelocity85"
+                  >
+                    <ion-icon
+                      name="speedometer"
+                      slot="start"
+                      color="medium"
+                    ></ion-icon>
+                  </ion-input>
+                </ion-item>
+                @if (getFieldError('benchVelocity85')) {
+                <ion-note color="danger"
+                  >{{ getFieldError('benchVelocity85') }}</ion-note
+                >
+                }
+              </ion-col>
+              <ion-col size="6">
+                <ion-item>
+                  <ion-input
+                    label="Carga (kg)"
+                    type="number"
+                    step="0.5"
+                    placeholder="127.5"
+                    formControlName="benchLoad85"
+                  >
+                    <ion-icon
+                      name="barbell"
+                      slot="start"
+                      color="medium"
+                    ></ion-icon>
+                  </ion-input>
+                </ion-item>
+                @if (getFieldError('benchLoad85')) {
+                <ion-note color="danger"
+                  >{{ getFieldError('benchLoad85') }}</ion-note
+                >
+                }
+              </ion-col>
+            </ion-row>
+
+            <!-- 75% 1RM -->
+            <ion-row class="percentage-row">
+              <ion-col size="12">
+                <h4>75% 1RM (Moderada-Alta)</h4>
+              </ion-col>
+              <ion-col size="6">
+                <ion-item>
+                  <ion-input
+                    label="Velocidad (m/s)"
+                    type="number"
+                    step="0.01"
+                    placeholder="0.5"
+                    formControlName="benchVelocity75"
+                  >
+                    <ion-icon
+                      name="speedometer"
+                      slot="start"
+                      color="medium"
+                    ></ion-icon>
+                  </ion-input>
+                </ion-item>
+                @if (getFieldError('benchVelocity75')) {
+                <ion-note color="danger"
+                  >{{ getFieldError('benchVelocity75') }}</ion-note
+                >
+                }
+              </ion-col>
+              <ion-col size="6">
+                <ion-item>
+                  <ion-input
+                    label="Carga (kg)"
+                    type="number"
+                    step="0.5"
+                    placeholder="112.5"
+                    formControlName="benchLoad75"
+                  >
+                    <ion-icon
+                      name="barbell"
+                      slot="start"
+                      color="medium"
+                    ></ion-icon>
+                  </ion-input>
+                </ion-item>
+                @if (getFieldError('benchLoad75')) {
+                <ion-note color="danger"
+                  >{{ getFieldError('benchLoad75') }}</ion-note
+                >
+                }
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </ion-card-content>
+      </ion-card>
+
+      <!-- DEADLIFT -->
+      <ion-card>
+        <ion-card-header>
+          <ion-card-title class="exercise-title">
+            <ion-icon name="barbell" color="tertiary"></ion-icon>
+            Deadlift
+          </ion-card-title>
+          <ion-card-subtitle
+            >Velocidades y cargas en series de 1 repetición</ion-card-subtitle
+          >
+        </ion-card-header>
+        <ion-card-content>
+          <ion-grid>
+            <!-- 90% 1RM -->
+            <ion-row class="percentage-row">
+              <ion-col size="12">
+                <h4>90% 1RM (Fuerza Máxima)</h4>
+              </ion-col>
+              <ion-col size="6">
+                <ion-item>
+                  <ion-input
+                    label="Velocidad (m/s)"
+                    type="number"
+                    step="0.01"
+                    placeholder="0.25"
+                    formControlName="deadliftVelocity90"
+                  >
+                    <ion-icon
+                      name="speedometer"
+                      slot="start"
+                      color="medium"
+                    ></ion-icon>
+                  </ion-input>
+                </ion-item>
+                @if (getFieldError('deadliftVelocity90')) {
+                <ion-note color="danger"
+                  >{{ getFieldError('deadliftVelocity90') }}</ion-note
+                >
+                }
+              </ion-col>
+              <ion-col size="6">
+                <ion-item>
+                  <ion-input
+                    label="Carga (kg)"
+                    type="number"
+                    step="0.5"
+                    placeholder="225"
+                    formControlName="deadliftLoad90"
+                  >
+                    <ion-icon
+                      name="barbell"
+                      slot="start"
+                      color="medium"
+                    ></ion-icon>
+                  </ion-input>
+                </ion-item>
+                @if (getFieldError('deadliftLoad90')) {
+                <ion-note color="danger"
+                  >{{ getFieldError('deadliftLoad90') }}</ion-note
+                >
+                }
+              </ion-col>
+            </ion-row>
+
+            <!-- 85% 1RM -->
+            <ion-row class="percentage-row">
+              <ion-col size="12">
+                <h4>85% 1RM (Alta Intensidad)</h4>
+              </ion-col>
+              <ion-col size="6">
+                <ion-item>
+                  <ion-input
+                    label="Velocidad (m/s)"
+                    type="number"
+                    step="0.01"
+                    placeholder="0.35"
+                    formControlName="deadliftVelocity85"
+                  >
+                    <ion-icon
+                      name="speedometer"
+                      slot="start"
+                      color="medium"
+                    ></ion-icon>
+                  </ion-input>
+                </ion-item>
+                @if (getFieldError('deadliftVelocity85')) {
+                <ion-note color="danger"
+                  >{{ getFieldError('deadliftVelocity85') }}</ion-note
+                >
+                }
+              </ion-col>
+              <ion-col size="6">
+                <ion-item>
+                  <ion-input
+                    label="Carga (kg)"
+                    type="number"
+                    step="0.5"
+                    placeholder="212.5"
+                    formControlName="deadliftLoad85"
+                  >
+                    <ion-icon
+                      name="barbell"
+                      slot="start"
+                      color="medium"
+                    ></ion-icon>
+                  </ion-input>
+                </ion-item>
+                @if (getFieldError('deadliftLoad85')) {
+                <ion-note color="danger"
+                  >{{ getFieldError('deadliftLoad85') }}</ion-note
+                >
+                }
+              </ion-col>
+            </ion-row>
+
+            <!-- 75% 1RM -->
+            <ion-row class="percentage-row">
+              <ion-col size="12">
+                <h4>75% 1RM (Moderada-Alta)</h4>
+              </ion-col>
+              <ion-col size="6">
+                <ion-item>
+                  <ion-input
+                    label="Velocidad (m/s)"
+                    type="number"
+                    step="0.01"
+                    placeholder="0.45"
+                    formControlName="deadliftVelocity75"
+                  >
+                    <ion-icon
+                      name="speedometer"
+                      slot="start"
+                      color="medium"
+                    ></ion-icon>
+                  </ion-input>
+                </ion-item>
+                @if (getFieldError('deadliftVelocity75')) {
+                <ion-note color="danger"
+                  >{{ getFieldError('deadliftVelocity75') }}</ion-note
+                >
+                }
+              </ion-col>
+              <ion-col size="6">
+                <ion-item>
+                  <ion-input
+                    label="Carga (kg)"
+                    type="number"
+                    step="0.5"
+                    placeholder="187.5"
+                    formControlName="deadliftLoad75"
+                  >
+                    <ion-icon
+                      name="barbell"
+                      slot="start"
+                      color="medium"
+                    ></ion-icon>
+                  </ion-input>
+                </ion-item>
+                @if (getFieldError('deadliftLoad75')) {
+                <ion-note color="danger"
+                  >{{ getFieldError('deadliftLoad75') }}</ion-note
+                >
+                }
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </ion-card-content>
+      </ion-card>
+    </form>
+
+    <!-- Botones de acción -->
+    <ion-card class="action-buttons">
+      <ion-card-content>
+        <ion-button
+          expand="block"
+          [disabled]="!isFormValid() || isSubmitting"
+          (click)="saveConfiguration()"
+          class="save-button"
+        >
+          @if (isSubmitting) {
+          <ion-icon name="settings" class="spinning" slot="start"></ion-icon>
+          Procesando... } @else {
+          <ion-icon name="save" slot="start"></ion-icon>
+          Guardar Configuración }
+        </ion-button>
+
+        @if (hasExistingData) {
+        <ion-button
+          expand="block"
+          fill="outline"
+          color="danger"
+          (click)="clearPersonalizedData()"
+          class="clear-button"
+        >
+          <ion-icon name="trash" slot="start"></ion-icon>
+          Eliminar Datos Personalizados
+        </ion-button>
+        }
+      </ion-card-content>
+    </ion-card>
+  </div>
+</ion-content>

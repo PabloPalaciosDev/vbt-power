@@ -5,6 +5,13 @@
       <ion-back-button defaultHref="/home"></ion-back-button>
     </ion-buttons>
     <ion-buttons slot="end">
+      <ion-button fill="clear" (click)="navigateToConfig()">
+        <ion-icon
+          style="font-size: 23px"
+          name="settings"
+          [color]="configurationStatus.isPersonalized ? 'success' : 'warning'"
+        ></ion-icon>
+      </ion-button>
       <ion-button fill="clear" (click)="mostrarModalInfo()">
         <ion-icon
           style="font-size: 25px"
@@ -63,10 +70,15 @@
             >
             </ion-input>
             @if (velocidad > 0) {
-              <ion-note slot="end" [color]="obtenerClasificacionVelocidad().color">
-                <ion-icon [name]="obtenerClasificacionVelocidad().icono"></ion-icon>
-                {{obtenerClasificacionVelocidad().texto}}
-              </ion-note>
+            <ion-note
+              slot="end"
+              [color]="obtenerClasificacionVelocidad().color"
+            >
+              <ion-icon
+                [name]="obtenerClasificacionVelocidad().icono"
+              ></ion-icon>
+              {{obtenerClasificacionVelocidad().texto}}
+            </ion-note>
             }
           </ion-item>
 
@@ -112,24 +124,22 @@
               class="calculate-button"
             >
               @if (calculando) {
-                <ion-icon name="refresh" class="spinning" slot="start"></ion-icon>
-                Calculando...
-              } @else {
-                <ion-icon name="calculator" slot="start"></ion-icon>
-                Calcular VBT
-              }
+              <ion-icon name="refresh" class="spinning" slot="start"></ion-icon>
+              Calculando... } @else {
+              <ion-icon name="calculator" slot="start"></ion-icon>
+              Calcular VBT }
             </ion-button>
 
             @if (mostrarResultados) {
-              <ion-button
-                expand="block"
-                fill="outline"
-                (click)="limpiarFormulario()"
-                class="clear-button"
-              >
-                <ion-icon name="refresh" slot="start"></ion-icon>
-                Nuevo Cálculo
-              </ion-button>
+            <ion-button
+              expand="block"
+              fill="outline"
+              (click)="limpiarFormulario()"
+              class="clear-button"
+            >
+              <ion-icon name="refresh" slot="start"></ion-icon>
+              Nuevo Cálculo
+            </ion-button>
             }
           </div>
         </form>
@@ -138,36 +148,36 @@
 
     <!-- Resultados VBT -->
     @if (mostrarResultados) {
-      <ion-card>
-        <ion-card-header>
-          <ion-card-title>📊 Resultados VBT</ion-card-title>
-          <ion-card-subtitle
-            >Ejercicio: {{obtenerNombreEjercicio()}}</ion-card-subtitle
-          >
-        </ion-card-header>
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>📊 Resultados VBT</ion-card-title>
+        <ion-card-subtitle
+          >Ejercicio: {{obtenerNombreEjercicio()}}</ion-card-subtitle
+        >
+      </ion-card-header>
 
       <ion-card-content [class.animate-in]="animarResultados">
         <!-- Resultado Principal -->
         @if (porcentaje !== 100) {
-          <div class="resultado-item destacado resultado-principal">
-            <ion-icon name="star" color="success"></ion-icon>
-            <div class="resultado-texto">
-              <p class="resultado-label">🎯 Carga Objetivo al {{porcentaje}}%</p>
-              <p class="resultado-valor-principal">
-                {{cargaEstimada | number:'1.1-1'}} kg
-              </p>
-            </div>
+        <div class="resultado-item destacado resultado-principal">
+          <ion-icon name="star" color="success"></ion-icon>
+          <div class="resultado-texto">
+            <p class="resultado-label">🎯 Carga Objetivo al {{porcentaje}}%</p>
+            <p class="resultado-valor-principal">
+              {{cargaEstimada | number:'1.1-1'}} kg
+            </p>
           </div>
+        </div>
         } @else {
-          <div class="resultado-item destacado resultado-principal">
-            <ion-icon name="trophy" color="warning"></ion-icon>
-            <div class="resultado-texto">
-              <p class="resultado-label">Tu 1RM Estimado</p>
-              <p class="resultado-valor-principal">
-                {{resultado1RM | number:'1.1-1'}} kg
-              </p>
-            </div>
+        <div class="resultado-item destacado resultado-principal">
+          <ion-icon name="trophy" color="warning"></ion-icon>
+          <div class="resultado-texto">
+            <p class="resultado-label">Tu 1RM Estimado</p>
+            <p class="resultado-valor-principal">
+              {{resultado1RM | number:'1.1-1'}} kg
+            </p>
           </div>
+        </div>
         }
 
         <!-- Información Detallada -->
@@ -183,7 +193,9 @@
           <div class="info-card">
             <ion-icon name="speedometer" color="secondary"></ion-icon>
             <div class="info-content">
-              <p class="info-label">% de la carga ingresada respecto al 1RM Actual</p>
+              <p class="info-label">
+                % de la carga ingresada respecto al 1RM Actual
+              </p>
               <p class="info-valor">{{percent1Rm | number:'1.1-1'}}%</p>
             </div>
           </div>
@@ -191,11 +203,14 @@
 
         <!-- Clasificación de Intensidad -->
         <div class="intensidad-banner">
-          <ion-icon name="informationCircle" color="tertiary"></ion-icon>
+          <ion-icon
+            name="information-circle-outline"
+            color="tertiary"
+          ></ion-icon>
           <span>{{obtenerNivelIntensidad()}}</span>
         </div>
       </ion-card-content>
-      </ion-card>
+    </ion-card>
     }
   </div>
 </ion-content>

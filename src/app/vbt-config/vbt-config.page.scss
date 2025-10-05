@@ -1,0 +1,204 @@
+.container {
+  padding: 16px;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.status-card {
+  margin-bottom: 20px;
+  border-radius: 12px;
+  border: 3px solid var(--ion-color-warning);
+}
+
+.status-content {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  justify-content: center;
+
+  ion-icon {
+    font-size: 24px;
+  }
+
+  p {
+    margin: 0;
+    font-weight: 900;
+  }
+}
+
+.exercise-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--ion-color-dark);
+  font-size: 1.2em;
+  font-weight: 600;
+}
+
+.percentage-row {
+  border-bottom: 1px solid var(--ion-color-light);
+  padding-bottom: 16px;
+  margin-bottom: 16px;
+
+  &:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+  }
+
+  h4 {
+    margin: 0 0 12px 0;
+    font-weight: 600;
+    color: var(--ion-color-medium-shade);
+    font-size: 1em;
+  }
+}
+
+ion-item {
+  --border-radius: 8px;
+  --background: var(--ion-color-light);
+  margin-bottom: 8px;
+
+  ion-icon[slot="start"] {
+    margin-inline-end: 12px;
+  }
+}
+
+ion-input {
+  --padding-start: 0;
+  --padding-end: 0;
+  font-weight: 500;
+}
+
+ion-note {
+  display: block;
+  margin-top: 4px;
+  margin-left: 16px;
+  font-size: 0.8em;
+}
+
+.action-buttons {
+  margin-top: 24px;
+  margin-bottom: 32px;
+}
+
+.save-button {
+  --background: var(--ion-color-success);
+  --border-radius: 12px;
+  height: 48px;
+  font-weight: 600;
+  margin-bottom: 12px;
+}
+
+.clear-button {
+  --border-radius: 12px;
+  height: 44px;
+  font-weight: 500;
+}
+
+.spinning {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Responsive design */
+@media (min-width: 768px) {
+  .container {
+    padding: 24px;
+  }
+
+  ion-card {
+    margin-bottom: 24px;
+  }
+
+  .exercise-title {
+    font-size: 1.3em;
+  }
+}
+
+/* Form validation styles */
+ion-item.ion-invalid.ion-touched {
+  --border-color: var(--ion-color-danger);
+  --highlight-color: var(--ion-color-danger);
+}
+
+ion-input.ion-invalid.ion-touched {
+  --color: var(--ion-color-danger);
+}
+
+/* Card enhancements */
+ion-card {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  border-radius: 16px;
+  margin-bottom: 20px;
+
+  ion-card-header {
+    padding-bottom: 8px;
+  }
+
+  ion-card-content {
+    padding-top: 8px;
+  }
+}
+
+/* Instructions card specific styling */
+ion-card:first-of-type ion-card-content {
+  ul {
+    margin: 12px 0;
+    padding-left: 20px;
+
+    li {
+      margin-bottom: 8px;
+      line-height: 1.5;
+    }
+  }
+}
+
+/* Grid improvements */
+ion-grid {
+  padding: 0;
+}
+
+ion-row {
+  margin: 0;
+}
+
+ion-col {
+  padding: 4px 8px;
+}
+
+/* Better visual hierarchy */
+h4 {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  &::before {
+    content: "●";
+    color: var(--ion-color-primary);
+    font-size: 0.8em;
+  }
+}
+
+/* Loading state */
+.save-button[disabled] {
+  opacity: 0.7;
+}
+
+/* Success and error states */
+ion-toast.success-toast {
+  --background: var(--ion-color-success);
+  --color: white;
+}
+
+ion-toast.error-toast {
+  --background: var(--ion-color-danger);
+  --color: white;
+}

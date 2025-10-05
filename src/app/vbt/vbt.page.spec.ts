@@ -33,21 +33,20 @@ describe('VbtPage', () => {
     expect(component.esFormularioValido()).toBeTruthy();
   });
 
-  it('should call vbtCalcular method', () => {
+  it('should call vbtCalcular method', async () => {
     spyOn(component, 'vbtCalcular').and.callThrough();
-    spyOn(console, 'log');
 
     component.carga = 100;
     component.velocidad = 0.8;
     component.ejercicio = 2;
     component.porcentaje = 85;
 
-    const result = component.vbtCalcular();
+    await component.vbtCalcular();
 
     expect(component.vbtCalcular).toHaveBeenCalled();
-    expect(result.carga).toBe(100);
-    expect(result.velocidad).toBe(0.8);
-    expect(result.ejercicio).toBe(2);
-    expect(result.porcentaje).toBe(85);
+    expect(component.mostrarResultados).toBeTruthy();
+    expect(component.resultado1RM).toBeGreaterThan(0);
+    expect(component.cargaEstimada).toBeGreaterThan(0);
+    expect(component.percent1Rm).toBeGreaterThan(0);
   });
 });

@@ -10,6 +10,10 @@ export const routes: Routes = [
     loadComponent: () => import('./vbt/vbt.page').then((m) => m.VbtPage),
   },
   {
+    path: 'vbt-config',
+    loadComponent: () => import('./vbt-config/vbt-config.page').then((m) => m.VbtConfigPage),
+  },
+  {
     path: '',
     redirectTo: 'home',
     pathMatch: 'full',
