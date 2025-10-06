@@ -220,7 +220,7 @@ export class VbtConfigService {
       isPersonalized,
       message: isPersonalized
         ? '✅ Usando tus valores personalizados de VBT'
-        : '⚠️ Usando valores genéricos. Configura tus datos personalizados para mayor precisión.',
+        : '⚠️ Estas usando valores genéricos',
     };
   }
 

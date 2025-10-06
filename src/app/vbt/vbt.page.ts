@@ -46,6 +46,7 @@ import { ModalController } from '@ionic/angular';
 import { InfoVbtPage } from './info-vbt/info-vbt.page';
 import { VbtConfigService, VbtCalculationInput, VbtCalculationResult } from '../services/vbt-config.service';
 import { Router } from '@angular/router';
+import { reduce } from 'rxjs';
 
 @Component({
   selector: 'app-vbt',
@@ -156,19 +157,18 @@ export class VbtPage implements OnInit {
   private async showConfigurationToast(): Promise<void> {
     const toast = await this.toastController.create({
       message: this.configurationStatus.message,
-      duration: 4000,
       position: 'top',
-      icon: 'alert-circle',
+      cssClass: 'custom-toast',
+      animated: true,
+      color: 'primary',
       buttons: [
         {
           text: 'Configurar',
           handler: () => {
             this.navigateToConfig();
+            //cerramos modal de Infovbtpage
+            this.modalCtrl.dismiss();
           }
-        },
-        {
-          text: 'Cerrar',
-          role: 'cancel'
         }
       ]
     });

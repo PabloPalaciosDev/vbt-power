@@ -15,15 +15,6 @@
   </ion-header>
 
   <div class="container">
-    <!-- Estado actual -->
-    <ion-card class="status-card">
-      <ion-card-content>
-        <div class="status-content">
-          <p>{{ getConfigStatus().message }}</p>
-        </div>
-      </ion-card-content>
-    </ion-card>
-
     <!-- Información -->
     <ion-card>
       <ion-card-header>
@@ -61,7 +52,9 @@
         </p>
         <p>
           <ion-note
-            >Puedes usar cargas que ronden los porcentajes indicados.</ion-note
+            ><strong
+              >Puedes usar cargas que ronden los porcentajes indicados.</strong
+            ></ion-note
           >
         </p>
       </ion-card-content>
@@ -86,20 +79,16 @@
               <ion-col size="12">
                 <h4>90% 1RM (Fuerza Máxima)</h4>
               </ion-col>
-              <ion-col size="6">
+              <ion-col size="12" sizeMd="6">
                 <ion-item>
                   <ion-input
+                    labelPlacement="floating"
                     label="Velocidad (m/s)"
                     type="number"
                     step="0.01"
                     placeholder="0.45"
                     formControlName="squatVelocity90"
                   >
-                    <ion-icon
-                      name="speedometer"
-                      slot="start"
-                      color="medium"
-                    ></ion-icon>
                   </ion-input>
                 </ion-item>
                 @if (getFieldError('squatVelocity90')) {
@@ -108,20 +97,16 @@
                 >
                 }
               </ion-col>
-              <ion-col size="6">
+              <ion-col size="12" sizeMd="6">
                 <ion-item>
                   <ion-input
+                    labelPlacement="floating"
                     label="Carga (kg)"
                     type="number"
                     step="0.5"
                     placeholder="180"
                     formControlName="squatLoad90"
                   >
-                    <ion-icon
-                      name="barbell"
-                      slot="start"
-                      color="medium"
-                    ></ion-icon>
                   </ion-input>
                 </ion-item>
                 @if (getFieldError('squatLoad90')) {
@@ -137,20 +122,16 @@
               <ion-col size="12">
                 <h4>85% 1RM (Alta Intensidad)</h4>
               </ion-col>
-              <ion-col size="6">
+              <ion-col size="12" sizeMd="6">
                 <ion-item>
                   <ion-input
+                    labelPlacement="floating"
                     label="Velocidad (m/s)"
                     type="number"
                     step="0.01"
                     placeholder="0.55"
                     formControlName="squatVelocity85"
                   >
-                    <ion-icon
-                      name="speedometer"
-                      slot="start"
-                      color="medium"
-                    ></ion-icon>
                   </ion-input>
                 </ion-item>
                 @if (getFieldError('squatVelocity85')) {
@@ -159,20 +140,16 @@
                 >
                 }
               </ion-col>
-              <ion-col size="6">
+              <ion-col size="12" sizeMd="6">
                 <ion-item>
                   <ion-input
+                    labelPlacement="floating"
                     label="Carga (kg)"
                     type="number"
                     step="0.5"
                     placeholder="170"
                     formControlName="squatLoad85"
                   >
-                    <ion-icon
-                      name="barbell"
-                      slot="start"
-                      color="medium"
-                    ></ion-icon>
                   </ion-input>
                 </ion-item>
                 @if (getFieldError('squatLoad85')) {
@@ -188,20 +165,16 @@
               <ion-col size="12">
                 <h4>75% 1RM (Moderada-Alta)</h4>
               </ion-col>
-              <ion-col size="6">
+              <ion-col size="12" sizeMd="6">
                 <ion-item>
                   <ion-input
+                    labelPlacement="floating"
                     label="Velocidad (m/s)"
                     type="number"
                     step="0.01"
                     placeholder="0.65"
                     formControlName="squatVelocity75"
                   >
-                    <ion-icon
-                      name="speedometer"
-                      slot="start"
-                      color="medium"
-                    ></ion-icon>
                   </ion-input>
                 </ion-item>
                 @if (getFieldError('squatVelocity75')) {
@@ -210,20 +183,16 @@
                 >
                 }
               </ion-col>
-              <ion-col size="6">
+              <ion-col size="12" sizeMd="6">
                 <ion-item>
                   <ion-input
+                    labelPlacement="floating"
                     label="Carga (kg)"
                     type="number"
                     step="0.5"
                     placeholder="150"
                     formControlName="squatLoad75"
                   >
-                    <ion-icon
-                      name="barbell"
-                      slot="start"
-                      color="medium"
-                    ></ion-icon>
                   </ion-input>
                 </ion-item>
                 @if (getFieldError('squatLoad75')) {
@@ -255,20 +224,16 @@
               <ion-col size="12">
                 <h4>90% 1RM (Fuerza Máxima)</h4>
               </ion-col>
-              <ion-col size="6">
+              <ion-col size="12" sizeMd="6">
                 <ion-item>
                   <ion-input
+                    labelPlacement="floating"
                     label="Velocidad (m/s)"
                     type="number"
                     step="0.01"
                     placeholder="0.25"
                     formControlName="benchVelocity90"
                   >
-                    <ion-icon
-                      name="speedometer"
-                      slot="start"
-                      color="medium"
-                    ></ion-icon>
                   </ion-input>
                 </ion-item>
                 @if (getFieldError('benchVelocity90')) {
@@ -277,20 +242,16 @@
                 >
                 }
               </ion-col>
-              <ion-col size="6">
+              <ion-col size="12" sizeMd="6">
                 <ion-item>
                   <ion-input
+                    labelPlacement="floating"
                     label="Carga (kg)"
                     type="number"
                     step="0.5"
                     placeholder="135"
                     formControlName="benchLoad90"
                   >
-                    <ion-icon
-                      name="barbell"
-                      slot="start"
-                      color="medium"
-                    ></ion-icon>
                   </ion-input>
                 </ion-item>
                 @if (getFieldError('benchLoad90')) {
@@ -306,20 +267,16 @@
               <ion-col size="12">
                 <h4>85% 1RM (Alta Intensidad)</h4>
               </ion-col>
-              <ion-col size="6">
+              <ion-col size="12" sizeMd="6">
                 <ion-item>
                   <ion-input
+                    labelPlacement="floating"
                     label="Velocidad (m/s)"
                     type="number"
                     step="0.01"
                     placeholder="0.35"
                     formControlName="benchVelocity85"
                   >
-                    <ion-icon
-                      name="speedometer"
-                      slot="start"
-                      color="medium"
-                    ></ion-icon>
                   </ion-input>
                 </ion-item>
                 @if (getFieldError('benchVelocity85')) {
@@ -328,20 +285,16 @@
                 >
                 }
               </ion-col>
-              <ion-col size="6">
+              <ion-col size="12" sizeMd="6">
                 <ion-item>
                   <ion-input
+                    labelPlacement="floating"
                     label="Carga (kg)"
                     type="number"
                     step="0.5"
                     placeholder="127.5"
                     formControlName="benchLoad85"
                   >
-                    <ion-icon
-                      name="barbell"
-                      slot="start"
-                      color="medium"
-                    ></ion-icon>
                   </ion-input>
                 </ion-item>
                 @if (getFieldError('benchLoad85')) {
@@ -357,20 +310,16 @@
               <ion-col size="12">
                 <h4>75% 1RM (Moderada-Alta)</h4>
               </ion-col>
-              <ion-col size="6">
+              <ion-col size="12" sizeMd="6">
                 <ion-item>
                   <ion-input
+                    labelPlacement="floating"
                     label="Velocidad (m/s)"
                     type="number"
                     step="0.01"
                     placeholder="0.5"
                     formControlName="benchVelocity75"
                   >
-                    <ion-icon
-                      name="speedometer"
-                      slot="start"
-                      color="medium"
-                    ></ion-icon>
                   </ion-input>
                 </ion-item>
                 @if (getFieldError('benchVelocity75')) {
@@ -379,20 +328,16 @@
                 >
                 }
               </ion-col>
-              <ion-col size="6">
+              <ion-col size="12" sizeMd="6">
                 <ion-item>
                   <ion-input
+                    labelPlacement="floating"
                     label="Carga (kg)"
                     type="number"
                     step="0.5"
                     placeholder="112.5"
                     formControlName="benchLoad75"
                   >
-                    <ion-icon
-                      name="barbell"
-                      slot="start"
-                      color="medium"
-                    ></ion-icon>
                   </ion-input>
                 </ion-item>
                 @if (getFieldError('benchLoad75')) {
@@ -424,20 +369,16 @@
               <ion-col size="12">
                 <h4>90% 1RM (Fuerza Máxima)</h4>
               </ion-col>
-              <ion-col size="6">
+              <ion-col size="12" sizeMd="6">
                 <ion-item>
                   <ion-input
+                    labelPlacement="floating"
                     label="Velocidad (m/s)"
                     type="number"
                     step="0.01"
                     placeholder="0.25"
                     formControlName="deadliftVelocity90"
                   >
-                    <ion-icon
-                      name="speedometer"
-                      slot="start"
-                      color="medium"
-                    ></ion-icon>
                   </ion-input>
                 </ion-item>
                 @if (getFieldError('deadliftVelocity90')) {
@@ -446,20 +387,16 @@
                 >
                 }
               </ion-col>
-              <ion-col size="6">
+              <ion-col size="12" sizeMd="6">
                 <ion-item>
                   <ion-input
+                    labelPlacement="floating"
                     label="Carga (kg)"
                     type="number"
                     step="0.5"
                     placeholder="225"
                     formControlName="deadliftLoad90"
                   >
-                    <ion-icon
-                      name="barbell"
-                      slot="start"
-                      color="medium"
-                    ></ion-icon>
                   </ion-input>
                 </ion-item>
                 @if (getFieldError('deadliftLoad90')) {
@@ -475,20 +412,16 @@
               <ion-col size="12">
                 <h4>85% 1RM (Alta Intensidad)</h4>
               </ion-col>
-              <ion-col size="6">
+              <ion-col size="12" sizeMd="6">
                 <ion-item>
                   <ion-input
+                    labelPlacement="floating"
                     label="Velocidad (m/s)"
                     type="number"
                     step="0.01"
                     placeholder="0.35"
                     formControlName="deadliftVelocity85"
                   >
-                    <ion-icon
-                      name="speedometer"
-                      slot="start"
-                      color="medium"
-                    ></ion-icon>
                   </ion-input>
                 </ion-item>
                 @if (getFieldError('deadliftVelocity85')) {
@@ -497,20 +430,16 @@
                 >
                 }
               </ion-col>
-              <ion-col size="6">
+              <ion-col size="12" sizeMd="6">
                 <ion-item>
                   <ion-input
+                    labelPlacement="floating"
                     label="Carga (kg)"
                     type="number"
                     step="0.5"
                     placeholder="212.5"
                     formControlName="deadliftLoad85"
                   >
-                    <ion-icon
-                      name="barbell"
-                      slot="start"
-                      color="medium"
-                    ></ion-icon>
                   </ion-input>
                 </ion-item>
                 @if (getFieldError('deadliftLoad85')) {
@@ -526,20 +455,16 @@
               <ion-col size="12">
                 <h4>75% 1RM (Moderada-Alta)</h4>
               </ion-col>
-              <ion-col size="6">
+              <ion-col size="12" sizeMd="6">
                 <ion-item>
                   <ion-input
+                    labelPlacement="floating"
                     label="Velocidad (m/s)"
                     type="number"
                     step="0.01"
                     placeholder="0.45"
                     formControlName="deadliftVelocity75"
                   >
-                    <ion-icon
-                      name="speedometer"
-                      slot="start"
-                      color="medium"
-                    ></ion-icon>
                   </ion-input>
                 </ion-item>
                 @if (getFieldError('deadliftVelocity75')) {
@@ -548,20 +473,16 @@
                 >
                 }
               </ion-col>
-              <ion-col size="6">
+              <ion-col size="12" sizeMd="6">
                 <ion-item>
                   <ion-input
+                    labelPlacement="floating"
                     label="Carga (kg)"
                     type="number"
                     step="0.5"
                     placeholder="187.5"
                     formControlName="deadliftLoad75"
                   >
-                    <ion-icon
-                      name="barbell"
-                      slot="start"
-                      color="medium"
-                    ></ion-icon>
                   </ion-input>
                 </ion-item>
                 @if (getFieldError('deadliftLoad75')) {

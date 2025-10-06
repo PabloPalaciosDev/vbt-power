@@ -8,7 +8,7 @@ import {
   arrowBack,
   checkmarkCircle,
   alertCircle,
-  informationCircle,
+  informationCircleOutline,
   barbell,
   speedometer,
   trash
@@ -91,7 +91,7 @@ export class VbtConfigPage implements OnInit {
       arrowBack,
       checkmarkCircle,
       alertCircle,
-      informationCircle,
+      informationCircleOutline,
       barbell,
       speedometer,
       trash
